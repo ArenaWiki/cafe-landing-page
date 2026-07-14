@@ -61,7 +61,31 @@ Our new home will be at
         <a href="https://cafe.miraheze.org">https://cafe.miraheze.org</a>, instead of
         the domain you are currently on. Do update your bookmarks to reflect
         this new change. We will fully roll out       </p>
-      <a class="button" href="https://cafe.miraheze.org">Continue Reading → </a> <a class="button" href="mailto:enews@dovedale.wiki">Contact</a>
+      <a class="button" href="https://cafe.miraheze.org">Continue Reading → </a> <a class="button" href="mailto:enews@dovedale.wiki">Contact</a> <a class="button" id="page-button" href="https://cafe.miraheze.org" hidden>Go to this page  → </a>
     </main>
   </body>
+
+  <script>
+    const baseUrl = "https://cafe.miraheze.org";
+  
+  	const currentPath = window.location.pathname;
+  	const currentQuery = window.location.search;
+  	const currentHash = window.location.hash;
+  
+  	const pageButton = document.getElementById("page-button");
+  
+  	if (currentPath !== "/" && currentPath !== "/index.html") {
+  		const targetUrl = baseUrl + currentPath + currentQuery + currentHash;
+  
+  		const pageName = currentPath
+  			.replace(/^\/wiki\//, "")
+  			.replace(/^\//, "")
+  			.replace(/_/g, " ")
+  			.replace(/\b\w/g, letter => letter.toUpperCase());
+  
+  		pageButton.href = targetUrl;
+  		pageButton.hidden = false;
+  		pageButton.innerHTML = `Go to ${pageName} → `;
+  	}
+  </script>
 </html>
